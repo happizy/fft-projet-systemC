@@ -7,17 +7,17 @@ HEA= $(SRC:.cpp=.h)
 CC=g++
 
 #on CentOS
-SYSTEMC=/usr/local/bin/Siemens_EDA/Catapult_Synthesis_2022.2_1-1019737/Mgc_home
+#SYSTEMC=/usr/local/bin/Siemens_EDA/Catapult_Synthesis_2022.2_1-1019737/Mgc_home
 #on Ubuntu
 #SYSTEMC=/usr/home/enstb1/ELEC/SystemC-2.3.3/systemc-2.3.3
-#SYSTEMC=/opt/systemc-2.3.3
+SYSTEMC=/opt/systemc
 
 #on CentOS
-LDFLAGS= -L$(SYSTEMC)/lib -L$(SYSTEMC)/shared/lib -Wl,-rpath=$(SYSTEMC)/lib:$(SYSTEMC)/shared/lib -lsystemc -lm
-CXXFLAGS= -g -I$(SYSTEMC)/shared/include -DDEBUG_SYSTEMC
+#LDFLAGS= -L$(SYSTEMC)/lib -L$(SYSTEMC)/shared/lib -Wl,-rpath=$(SYSTEMC)/lib:$(SYSTEMC)/shared/lib -lsystemc -lm
+#CXXFLAGS= -g -I$(SYSTEMC)/shared/include -DDEBUG_SYSTEMC
 #on Ubuntu
-#LDFLAGS= -L$(SYSTEMC)/lib-linux64 -Wl,-rpath=$(SYSTEMC)/lib-linux64 -lsystemc -lm
-#CXXFLAGS= -W -Wall -pedantic -g -I$(SYSTEMC)/include -DDEBUG_SYSTEMC
+LDFLAGS= -L$(SYSTEMC)/lib -Wl,-rpath,$(SYSTEMC)/lib -lsystemc -lm
+CXXFLAGS= -W -Wall -pedantic -g -I$(SYSTEMC)/include -DDEBUG_SYSTEMC -std=c++17
 
 all: $(EXEC)
 
