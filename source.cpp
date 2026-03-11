@@ -12,42 +12,29 @@ void SOURCE::COMPORTEMENT()
   std::ifstream realStream("in_real.txt");
   std::ifstream imagStream("in_imag.txt");
 		
-  float tmp_real, tmp_imag;
-
-  data_valid.write(SC_LOGIC_0);
-  data_real.write(0.0);
-  data_imag.write(0.0);
+  float tmp_val_real, tmp_val_imag;
 
   if(!realStream||!imagStream)
-    //cout<<"[SOURCE] "<<"Un des fichiers d'entree n'est pas ouvert"<<endl;
+    cout << "[SOURCE] " << "Un des fichiers d'entree n'est pas ouvert" << endl;
 
   wait();
 
-  realStream>>tmp_real;
-  imagStream>>tmp_imag;
-  data_real.write(tmp_real);
-  data_imag.write(tmp_imag);
-  cout << "writing base source values ("<<tmp_real<<", "<<tmp_imag<<") and setting valid" << endl;
-  data_valid.write(SC_LOGIC_1);
+  while(true) {
+    if(!realStream.eof()&&!imagStream.eof()){
+      realStream >> tmp_val_real;
+      fifo_real.write(tmp_val_real);
 
+      imagStream >> tmp_val_imag;
+      fifo_imag.write(tmp_val_imag);
+      wait();
 
-  wait();
-
-  while(true)
-    {
-      if(data_req.read() == SC_LOGIC_1){
-        if(!realStream.eof()&&!imagStream.eof()){
-          realStream>>tmp_real;
-          imagStream>>tmp_imag;
-          data_real.write(tmp_real);
-          data_imag.write(tmp_imag);
-          data_valid.write(SC_LOGIC_1);
-          //cout << "writing source ("<<tmp_real<<", "<<tmp_imag<<") and setting valid" << endl;
-        }else{
-          cout << "Fin de fichier input" << endl;
-          data_valid.write(SC_LOGIC_0);
-        }
-      }
+      if (fifo_imag.num_free() == 0 && data_req.read() == SC_LOGIC_1) {
+        data_valid.write(SC_LOGIC_1);
+        cout << "[SOURCE] Data valid (1)" << endl;
+      } else { data_valid.write(SC_LOGIC_0); }
+    } else { 
+      //cout << "[SOURCE] " << "Fin des fichiers d'entree atteinte." << endl;
       wait();
     }
+  }
 }	

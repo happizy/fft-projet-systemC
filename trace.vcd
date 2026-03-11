@@ -1,0 +1,192 @@
+$date
+     Mar 10, 2026       21:41:36
+$end
+
+$version
+ SystemC 2.3.3-Accellera --- Feb  5 2026 14:19:13
+$end
+
+$timescale
+     1 ns
+$end
+
+$scope module SystemC $end
+$scope module top $end
+$var real    1  aaaaa  source_fft_real_0       $end
+$var real    1  aaaab  source_fft_real_1       $end
+$var real    1  aaaac  source_fft_real_2       $end
+$var real    1  aaaad  source_fft_real_3       $end
+$var real    1  aaaae  source_fft_real_4       $end
+$var real    1  aaaaf  source_fft_real_5       $end
+$var real    1  aaaag  source_fft_real_6       $end
+$var real    1  aaaah  source_fft_real_7       $end
+$var real    1  aaaai  source_fft_real_8       $end
+$var real    1  aaaaj  source_fft_real_9       $end
+$var real    1  aaaak  source_fft_real_10       $end
+$var real    1  aaaal  source_fft_real_11       $end
+$var real    1  aaaam  source_fft_real_12       $end
+$var real    1  aaaan  source_fft_real_13       $end
+$var real    1  aaaao  source_fft_real_14       $end
+$var real    1  aaaap  source_fft_real_15       $end
+$var real    1  aaaaq  source_fft_imag_0       $end
+$var real    1  aaaar  source_fft_imag_1       $end
+$var real    1  aaaas  source_fft_imag_2       $end
+$var real    1  aaaat  source_fft_imag_3       $end
+$var real    1  aaaau  source_fft_imag_4       $end
+$var real    1  aaaav  source_fft_imag_5       $end
+$var real    1  aaaaw  source_fft_imag_6       $end
+$var real    1  aaaax  source_fft_imag_7       $end
+$var real    1  aaaay  source_fft_imag_8       $end
+$var real    1  aaaaz  source_fft_imag_9       $end
+$var real    1  aaaba  source_fft_imag_10       $end
+$var real    1  aaabb  source_fft_imag_11       $end
+$var real    1  aaabc  source_fft_imag_12       $end
+$var real    1  aaabd  source_fft_imag_13       $end
+$var real    1  aaabe  source_fft_imag_14       $end
+$var real    1  aaabf  source_fft_imag_15       $end
+$var real    1  aaabg  sink_fft_real_0       $end
+$var real    1  aaabh  sink_fft_real_1       $end
+$var real    1  aaabi  sink_fft_real_2       $end
+$var real    1  aaabj  sink_fft_real_3       $end
+$var real    1  aaabk  sink_fft_real_4       $end
+$var real    1  aaabl  sink_fft_real_5       $end
+$var real    1  aaabm  sink_fft_real_6       $end
+$var real    1  aaabn  sink_fft_real_7       $end
+$var real    1  aaabo  sink_fft_real_8       $end
+$var real    1  aaabp  sink_fft_real_9       $end
+$var real    1  aaabq  sink_fft_real_10       $end
+$var real    1  aaabr  sink_fft_real_11       $end
+$var real    1  aaabs  sink_fft_real_12       $end
+$var real    1  aaabt  sink_fft_real_13       $end
+$var real    1  aaabu  sink_fft_real_14       $end
+$var real    1  aaabv  sink_fft_real_15       $end
+$var real    1  aaabw  sink_fft_imag_0       $end
+$var real    1  aaabx  sink_fft_imag_1       $end
+$var real    1  aaaby  sink_fft_imag_2       $end
+$var real    1  aaabz  sink_fft_imag_3       $end
+$var real    1  aaaca  sink_fft_imag_4       $end
+$var real    1  aaacb  sink_fft_imag_5       $end
+$var real    1  aaacc  sink_fft_imag_6       $end
+$var real    1  aaacd  sink_fft_imag_7       $end
+$var real    1  aaace  sink_fft_imag_8       $end
+$var real    1  aaacf  sink_fft_imag_9       $end
+$var real    1  aaacg  sink_fft_imag_10       $end
+$var real    1  aaach  sink_fft_imag_11       $end
+$var real    1  aaaci  sink_fft_imag_12       $end
+$var real    1  aaacj  sink_fft_imag_13       $end
+$var real    1  aaack  sink_fft_imag_14       $end
+$var real    1  aaacl  sink_fft_imag_15       $end
+$upscope $end
+$upscope $end
+$enddefinitions  $end
+
+$comment
+All initial values are dumped below at time 0 sec = 0 timescale units.
+$end
+
+$dumpvars
+r2011 aaaaa
+r0 aaaab
+r0 aaaac
+r0 aaaad
+r3.559244355763391e-17 aaaae
+r1.832023514993055e+25 aaaaf
+r6.593495034451775e+22 aaaag
+r7.555081327053433e+31 aaaah
+r1.163049618668772e+33 aaaai
+r1.069251965022726e-38 aaaaj
+r3.459590036322679e-12 aaaak
+r0 aaaal
+r0 aaaam
+r0 aaaan
+r0 aaaao
+r0 aaaap
+r2011 aaaaq
+r0 aaaar
+r0 aaaas
+r0 aaaat
+r3.559244355763391e-17 aaaau
+r1.832023514993055e+25 aaaav
+r6.593495034451775e+22 aaaaw
+r7.555081327053433e+31 aaaax
+r0 aaaay
+r0 aaaaz
+r0 aaaba
+r0 aaabb
+r0 aaabc
+r0 aaabd
+r0 aaabe
+r0 aaabf
+r8.646151654730554e-41 aaabg
+r0 aaabh
+r0 aaabi
+r0 aaabj
+r3.559244355763391e-17 aaabk
+r1.832023514993055e+25 aaabl
+r6.593495034451775e+22 aaabm
+r7.555081327053433e+31 aaabn
+r0 aaabo
+r0 aaabp
+r0 aaabq
+r0 aaabr
+r0 aaabs
+r0 aaabt
+r0 aaabu
+r0 aaabv
+r8.646151654730554e-41 aaabw
+r0 aaabx
+r0 aaaby
+r0 aaabz
+r3.559244355763391e-17 aaaca
+r1.832023514993055e+25 aaacb
+r6.593495034451775e+22 aaacc
+r7.555081327053433e+31 aaacd
+r0 aaace
+r0 aaacf
+r0 aaacg
+r0 aaach
+r0 aaaci
+r0 aaacj
+r0 aaack
+r0 aaacl
+$end
+
+#10
+r2011 aaaab
+r2011 aaaar
+
+#20
+r2011 aaaac
+r2011 aaaas
+
+#30
+r2011 aaaad
+r2011 aaaat
+
+#40
+r2011 aaaae
+r2011 aaaau
+
+#50
+r2011 aaaaf
+r2011 aaaav
+
+#60
+r2011 aaaag
+r2011 aaaaw
+
+#70
+r2011 aaaah
+r2011 aaaax
+
+#80
+r1 aaaai
+r1 aaaay
+
+#90
+r0 aaaaj
+
+#100
+r0 aaaak
+
+#2000

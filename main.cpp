@@ -19,14 +19,10 @@ int sc_main(int argc, char *argv[])
   //sc_trace(tf, mainTop.source_fft, "fifo1");
   // MAIS il faut faire appel a la methode
   // trace() du canal que l'on veut suivre
-  //mainTop.source_fft.trace(tf);
-  //mainTop.fft_sink.trace(tf);
-
-  sc_trace(tf, mainTop.data_imag_in, "source_imag");
-  sc_trace(tf, mainTop.data_real_in, "source_real");
-  sc_trace(tf, mainTop.data_valid_source, "source_valid");
-  sc_trace(tf, mainTop.data_req_source, "source_req");
-  sc_trace(tf, mainTop.clk, "clk");
+  mainTop.source_fft_real.trace(tf);
+  mainTop.source_fft_imag.trace(tf);
+  mainTop.sink_fft_real.trace(tf);
+  mainTop.sink_fft_imag.trace(tf);
 
 
   //Lancement de la simulation
