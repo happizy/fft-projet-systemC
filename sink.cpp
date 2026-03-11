@@ -15,7 +15,7 @@ void SINK::COMPORTEMENT() {
   std::ifstream imagStream_ref("out_imag_ref_valid.txt");
 
   float real, imag, real_ref, imag_ref, diff, max_error = 0.;
-  data_req.write(SC_LOGIC_0);
+  data_req.write(SC_LOGIC_1);
   int i;
   if (!realStream || !imagStream || !realStream_ref || !imagStream_ref) {
     // cout<<"[SINK] "<<"Un des fichiers d'entree n'est pas ouvert"<<endl;
@@ -26,18 +26,15 @@ void SINK::COMPORTEMENT() {
     // if (in.num_available() == 16 && data_valid.read() == SC_LOGIC_1) {
     //  cout<<"[SINK] "<< "Lecture des 16 �chantillons par le bloc SINK..." <<
     //  endl;
-    if (n < SIZE) {
-      data_req.write(SC_LOGIC_1);
-      if (data_valid.read() == SC_LOGIC_1 && data_req.read() == SC_LOGIC_1) {
-        real = data_real.read();
-        imag = data_imag.read();
-        realStream << real << endl;
-        imagStream << imag << endl;
-        n++;
+    if (data_valid.read() == SC_LOGIC_1) {
+      real = data_real.read();
+      imag = data_imag.read();
+      realStream << real << endl;
+      imagStream << imag << endl;
+      n++;
+      if (n >= SIZE) {
+        n = 0;
       }
-    } else {
-      data_req.write(SC_LOGIC_0);
-      n = 0;
     }
     wait();
 

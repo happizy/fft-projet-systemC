@@ -22,43 +22,26 @@ void FFT::butterfly(complex_t *p_twiddle, complex_t *p_in1, complex_t *p_in2,
 void FFT::comportement() {
   int n = 0;
   int m = 0;
-  bool req_issued = false;
-  bool pending_output = false;
-  bool output_armed = false;
   complex_t cpx_in[SIZE], cpx_out[SIZE], stage1[SIZE], stage2[SIZE];
   enum data_state s = INPUT;
   data_req_source.write(SC_LOGIC_0);
   data_valid_sink.write(SC_LOGIC_0);
-  wait();
-
+  wait(15);
   while (1) {
+    wait();
     switch (s) {
     case INPUT:
-      if (n < SIZE) {
-        if (!req_issued) {
-          data_req_source.write(SC_LOGIC_1);
-          req_issued = true;
-        } else {
-          data_req_source.write(SC_LOGIC_1);
-          if (data_valid_source.read() == SC_LOGIC_1) {
-            cpx_in[n].real = data_real_in.read();
-            cpx_in[n].imag = data_imag_in.read();
-            n++;
-            if (n >= SIZE) {
-              data_req_source.write(SC_LOGIC_0);
-              req_issued = false;
-              n = 0;
-              s = COMPUTE;
-            }
-          }
+      data_req_source.write(SC_LOGIC_1);
+      if (data_valid_source.read() == SC_LOGIC_1) {
+        cpx_in[n].real = data_real_in.read();
+        cpx_in[n].imag = data_imag_in.read();
+        n++;
+        if (n >= SIZE) {
+          data_req_source.write(SC_LOGIC_0);
+          n = 0;
+          s = COMPUTE;
         }
-      } else {
-        data_req_source.write(SC_LOGIC_0);
-        req_issued = false;
-        n = 0;
-        s = COMPUTE;
       }
-      wait();
       break;
 
     case COMPUTE:
@@ -121,45 +104,26 @@ void FFT::comportement() {
       //   cpx_out[7].imag);
 
       m = 0;
-      pending_output = true;
-      output_armed = false;
-      data_valid_sink.write(SC_LOGIC_0);
       s = OUTPUT;
-      wait();
       break;
 
     case OUTPUT:
-      if (pending_output) {
+      if (m < SIZE) {
         data_real_out.write(cpx_out[m].real);
         data_imag_out.write(cpx_out[m].imag);
         data_valid_sink.write(SC_LOGIC_1);
-        pending_output = false;
-        output_armed = true;
+        cout << "(" << cpx_out[m].real << "," << cpx_out[m].imag << ")" << endl;
+        m++;
+      } else {
+        cout << "FFT output done" << endl;
+        data_valid_sink.write(SC_LOGIC_0);
+        data_req_source.write(SC_LOGIC_1);
+        s = INPUT;
       }
-
-      if (output_armed && data_valid_sink.read() == SC_LOGIC_1 &&
-          data_req_sink.read() == SC_LOGIC_1) {
-        cout << "(" << cpx_out[m].real << "," << cpx_out[m].imag << ")"
-             << endl;
-        if (m + 1 < SIZE) {
-          m++;
-          pending_output = true;
-          output_armed = false;
-          data_valid_sink.write(SC_LOGIC_0);
-        } else {
-          cout << "FFT output done" << endl;
-          data_valid_sink.write(SC_LOGIC_0);
-          m = 0;
-          output_armed = false;
-          s = INPUT;
-        }
-      }
-      wait();
       break;
     default:
       cout << "Work done 🍻" << endl;
       s = INPUT;
-      wait();
       break;
     }
   }

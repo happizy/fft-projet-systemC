@@ -20,16 +20,9 @@ void SOURCE::COMPORTEMENT() {
     // cout<<"[SOURCE] "<<"Un des fichiers d'entree n'est pas ouvert"<<endl;
   }
 
-  wait();
-
-  if (realStream >> tmp_real && imagStream >> tmp_imag) {
-    data_real.write(tmp_real);
-    data_imag.write(tmp_imag);
-    data_valid.write(SC_LOGIC_1);
-  }
-
   while (true) {
-    if (data_valid.read() == SC_LOGIC_1 && data_req.read() == SC_LOGIC_1) {
+    wait();
+    if (data_req.read() == SC_LOGIC_1) {
       if (realStream >> tmp_real && imagStream >> tmp_imag) {
         data_real.write(tmp_real);
         data_imag.write(tmp_imag);
@@ -38,6 +31,5 @@ void SOURCE::COMPORTEMENT() {
         data_valid.write(SC_LOGIC_0);
       }
     }
-    wait();
   }
 }
