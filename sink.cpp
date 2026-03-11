@@ -25,7 +25,7 @@ void SINK::COMPORTEMENT()
   while(true) { 
     if (fifo_real.num_available()>=16 && fifo_imag.num_available()>=16) {
       //cout<<"[SINK] "<< "Lecture des 16 �chantillons par le bloc SINK..." << endl;
-      for (i = 0; i < 8; i++) { 
+      for (i = 0; i < N; i++) { 
         real= fifo_real.read();
         imag= fifo_imag.read();
         wait();

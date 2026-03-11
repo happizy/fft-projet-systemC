@@ -28,7 +28,7 @@ void SOURCE::COMPORTEMENT()
       fifo_imag.write(tmp_val_imag);
       wait();
 
-      if (fifo_imag.num_free() == 0 && data_req.read() == SC_LOGIC_1) {
+      if (fifo_imag.num_free() == 0 && fifo_real.num_free() == 0) {
         data_valid.write(SC_LOGIC_1);
         cout << "[SOURCE] Data valid (1)" << endl;
       } else { data_valid.write(SC_LOGIC_0); }

@@ -2,6 +2,9 @@
 #define SINK_H
 
 #include "systemc.h"
+#include "params.h"
+
+#define N (FIFO_SIZE>>1)
 
 /*
 CLOCK: YES

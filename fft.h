@@ -1,11 +1,13 @@
 #ifndef FFT_H
 #define FFT_H
 
-#define N 8
-
 #include <systemc.h>
+
 #include "sink.h"
 #include "source.h"
+#include "params.h"
+
+#define N (FIFO_SIZE>>1)
 
 typedef struct{
     float real;

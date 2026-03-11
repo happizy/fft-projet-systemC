@@ -5,6 +5,8 @@
 #include "fft.h"
 #include "sink.h"
 
+#include "params.h"
+
 /*
 CLOCK: YES
 
@@ -35,10 +37,10 @@ SC_MODULE (TOP) {
 
  SC_CTOR(TOP)
    :  clk("clk", 10, SC_NS, 0.5),
-    source_fft_real("source_fft_real", 16),
-    source_fft_imag("source_fft_imag", 16),
-    sink_fft_real("sink_fft_real", 16),
-    sink_fft_imag("sink_fft_imag", 16),
+    source_fft_real("source_fft_real", FIFO_SIZE),
+    source_fft_imag("source_fft_imag", FIFO_SIZE),
+    sink_fft_real("sink_fft_real", FIFO_SIZE),
+    sink_fft_imag("sink_fft_imag", FIFO_SIZE),
     FFT1("FFT_PROCESS"),
     SOURCE1("SOURCE_PROCESS"),
     SINK1("SINK_PROCESS")
