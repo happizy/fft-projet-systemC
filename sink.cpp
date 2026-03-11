@@ -20,25 +20,23 @@ void SINK::COMPORTEMENT() {
   if (!realStream || !imagStream || !realStream_ref || !imagStream_ref) {
     // cout<<"[SINK] "<<"Un des fichiers d'entree n'est pas ouvert"<<endl;
   }
-  wait(2);
+  wait(1);
 
   while (true) {
     // if (in.num_available() == 16 && data_valid.read() == SC_LOGIC_1) {
     //  cout<<"[SINK] "<< "Lecture des 16 �chantillons par le bloc SINK..." <<
     //  endl;
-    data_req.write(SC_LOGIC_0);
     if (n < SIZE) {
-      if (data_valid.read() == SC_LOGIC_1) {
+      data_req.write(SC_LOGIC_1);
+      if (data_valid.read() == SC_LOGIC_1 && data_req.read() == SC_LOGIC_1) {
         real = data_real.read();
         imag = data_imag.read();
         realStream << real << endl;
         imagStream << imag << endl;
         n++;
       }
-      if (n < SIZE - 1) {
-        data_req.write(SC_LOGIC_1);
-      }
     } else {
+      data_req.write(SC_LOGIC_0);
       n = 0;
     }
     wait();
