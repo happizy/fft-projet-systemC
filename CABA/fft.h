@@ -14,10 +14,10 @@
 #include "source.h"
 #include <systemc.h>
 
-typedef struct {
-  sc_fixed<FIXED_POINT, Q_FORMAT> real;
-  sc_fixed<FIXED_POINT, Q_FORMAT> imag;
-} complex_t;
+template <int STAGE> struct complex_t {
+  sc_fixed<FIXED_POINT + STAGE, Q_FORMAT + STAGE> real;
+  sc_fixed<FIXED_POINT + STAGE, Q_FORMAT + STAGE> imag;
+};
 
 typedef struct {
   sc_fixed<FIXED_POINT, Q_FORMAT_W> real;
@@ -41,7 +41,21 @@ public:
 
 private:
   void comportement();
-  void butterfly(twiddle_t * p_twiddle, complex_t * p_in1, complex_t * p_in2,
-                 complex_t * p_out1, complex_t * p_out2);
+  template <int STAGE>
+  void butterfly(twiddle_t * p_twiddle, complex_t<STAGE> * p_in1,
+                 complex_t<STAGE> * p_in2, complex_t<STAGE + 1> * p_out1,
+                 complex_t<STAGE + 1> * p_out2) {
+    p_out1->real = p_in1->real + ((p_in2->real * p_twiddle->real) -
+                                  (p_in2->imag * p_twiddle->imag));
+
+    p_out1->imag = p_in1->imag + ((p_in2->real * p_twiddle->imag) +
+                                  (p_in2->imag * p_twiddle->real));
+
+    p_out2->real = p_in1->real - ((p_in2->real * p_twiddle->real) -
+                                  (p_in2->imag * p_twiddle->imag));
+
+    p_out2->imag = p_in1->imag - ((p_in2->real * p_twiddle->imag) +
+                                  (p_in2->imag * p_twiddle->real));
+  };
 };
 #endif

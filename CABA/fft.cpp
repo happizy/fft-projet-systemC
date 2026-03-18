@@ -7,22 +7,13 @@ enum data_state { INPUT, COMPUTE, OUTPUT, END };
 twiddle_t twiddles[4] = {
     {1, 0}, {0.707107, -0.707107}, {0, -1}, {-0.707107, -0.707107}};
 
-void FFT::butterfly(twiddle_t *p_twiddle, complex_t *p_in1, complex_t *p_in2,
-                    complex_t *p_out1, complex_t *p_out2) {
-  p_out1->real = (p_in1->real + ((p_in2->real * p_twiddle->real) -
-                                 (p_in2->imag * p_twiddle->imag)));
-  p_out1->imag = (p_in1->imag + ((p_in2->real * p_twiddle->imag) +
-                                 (p_in2->imag * p_twiddle->real)));
-  p_out2->real = (p_in1->real - ((p_in2->real * p_twiddle->real) -
-                                 (p_in2->imag * p_twiddle->imag)));
-  p_out2->imag = (p_in1->imag - ((p_in2->real * p_twiddle->imag) +
-                                 (p_in2->imag * p_twiddle->real)));
-}
-
 void FFT::comportement() {
   int n = 0;
   int m = 0;
-  complex_t cpx_in[SIZE], cpx_out[SIZE], stage1[SIZE], stage2[SIZE];
+  complex_t<0> cpx_in[SIZE];
+  complex_t<1> stage1[SIZE];
+  complex_t<2> stage2[SIZE];
+  complex_t<3> cpx_out[SIZE];
   enum data_state s = INPUT;
   data_req_source.write(SC_LOGIC_0);
   data_valid_sink.write(SC_LOGIC_0);
