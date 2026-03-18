@@ -28,6 +28,7 @@ int sc_main(int argc, char *argv[]) {
   sc_trace(tf, mainTop.data_req_source, "source_req");
   sc_trace(tf, mainTop.data_valid_sink, "sink_valid");
   sc_trace(tf, mainTop.data_req_sink, "sink_req");
+  sc_trace(tf, mainTop.diff_out, "max_error");
   sc_trace(tf, mainTop.clk, "clk");
 
   // Lancement de la simulation

@@ -15,6 +15,7 @@ SC_MODULE(SINK) {
   sc_in_clk clk;
   sc_in<sc_fixed<FIXED_POINT_O, Q_FORMAT_O>> data_imag, data_real;
   sc_in<sc_logic> data_valid;
+  sc_out<float> diff_out; // debug
   sc_out<sc_logic> data_req;
 
   void COMPORTEMENT();

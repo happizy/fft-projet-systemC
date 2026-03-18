@@ -21,6 +21,7 @@ SC_MODULE(TOP) {
       data_req_sink;
   sc_signal<sc_fixed<FIXED_POINT, Q_FORMAT>> data_imag_in, data_real_in;
   sc_signal<sc_fixed<FIXED_POINT_O, Q_FORMAT_O>> data_imag_out, data_real_out;
+  sc_signal<float> diff_out; // debug
   // sc_fifo<float> source_fft;
   sc_fifo<float> fft_sink;
 
@@ -37,7 +38,7 @@ SC_MODULE(TOP) {
         data_req_sink("req_sink"),
         // source_fft("source_fft", 16),
         fft_sink("fft_sink", 16), FFT1("FFT_PROCESS"),
-        SOURCE1("SOURCE_PROCESS"), SINK1("SINK_PROCESS") {
+        SOURCE1("SOURCE_PROCESS"), SINK1("SINK_PROCESS"), diff_out("diff_out") {
 
     FFT1.clk(clk);
     FFT1.data_valid_source(data_valid_source);
@@ -64,5 +65,6 @@ SC_MODULE(TOP) {
     SINK1.data_imag(data_imag_out);
     SINK1.data_real(data_real_out);
     // SINK1.in(fft_sink);
+    SINK1.diff_out(diff_out);
   }
 };

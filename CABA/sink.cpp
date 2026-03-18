@@ -28,10 +28,18 @@ void SINK::COMPORTEMENT() {
       imag = (float)data_imag.read();
       realStream << real << endl;
       imagStream << imag << endl;
+      realStream_ref >> real_ref;
+      imagStream_ref >> imag_ref;
+      diff = sqrt(pow(real - real_ref, 2) + pow(imag - imag_ref, 2));
+      if (diff > max_error) {
+        max_error = diff;
+      }
+
       n++;
       if (n >= SIZE) {
         n = 0;
       }
+      diff_out.write(max_error);
     }
     wait();
   }
