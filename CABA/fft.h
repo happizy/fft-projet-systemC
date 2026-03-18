@@ -6,7 +6,9 @@
 #ifndef SIZE
 #define SIZE 8
 #define BUS_DEPTH (2 * SIZE)
+#define FIXED_POINT_O 27
 #define FIXED_POINT 23
+#define Q_FORMAT_O 24
 #define Q_FORMAT 18
 #define Q_FORMAT_W 2
 #endif
@@ -15,8 +17,8 @@
 #include <systemc.h>
 
 template <int STAGE> struct complex_t {
-  sc_fixed<FIXED_POINT + STAGE, Q_FORMAT + STAGE> real;
-  sc_fixed<FIXED_POINT + STAGE, Q_FORMAT + STAGE> imag;
+  sc_fixed<FIXED_POINT + STAGE * 2, Q_FORMAT + STAGE * 2> real;
+  sc_fixed<FIXED_POINT + STAGE * 2, Q_FORMAT + STAGE * 2> imag;
 };
 
 typedef struct {
@@ -28,7 +30,7 @@ SC_MODULE(FFT) {
 public:
   sc_in_clk clk;
   sc_in<sc_fixed<FIXED_POINT, Q_FORMAT>> data_imag_in, data_real_in;
-  sc_out<sc_fixed<FIXED_POINT, Q_FORMAT>> data_imag_out, data_real_out;
+  sc_out<sc_fixed<FIXED_POINT_O, Q_FORMAT_O>> data_imag_out, data_real_out;
   sc_in<sc_logic> data_valid_source;
   sc_in<sc_logic> data_req_sink;
   sc_out<sc_logic> data_valid_sink;
