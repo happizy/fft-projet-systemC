@@ -118,12 +118,11 @@ void FFT::comportement() {
         cout << "FFT output done" << endl;
         data_valid_sink.write(SC_LOGIC_0);
         data_req_source.write(SC_LOGIC_1);
+        cout << "Work done 🍻" << endl;
         s = INPUT;
       }
       break;
     default:
-      cout << "Work done 🍻" << endl;
-      s = INPUT;
       break;
     }
   }
