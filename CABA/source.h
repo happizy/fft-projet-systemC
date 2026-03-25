@@ -11,7 +11,7 @@
 
 SC_MODULE(SOURCE) {
   sc_in_clk clk;
-  sc_out<sc_fixed<FIXED_POINT, Q_FORMAT>> data_real, data_imag;
+  sc_out<sc_fixed<FIXED_POINT, Q_FORMAT, SC_RND, SC_SAT>> data_real, data_imag;
   sc_out<sc_logic> data_valid;
   sc_in<sc_logic> data_req;
 

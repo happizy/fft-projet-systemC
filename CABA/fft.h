@@ -17,20 +17,22 @@
 #include <systemc.h>
 
 template <int STAGE> struct complex_t {
-  sc_fixed<FIXED_POINT + STAGE * 2, Q_FORMAT + STAGE * 2> real;
-  sc_fixed<FIXED_POINT + STAGE * 2, Q_FORMAT + STAGE * 2> imag;
+  sc_fixed<FIXED_POINT + STAGE * 2, Q_FORMAT + STAGE * 2, SC_RND, SC_SAT> real;
+  sc_fixed<FIXED_POINT + STAGE * 2, Q_FORMAT + STAGE * 2, SC_RND, SC_SAT> imag;
 };
 
 typedef struct {
-  sc_fixed<FIXED_POINT, Q_FORMAT_W> real;
-  sc_fixed<FIXED_POINT, Q_FORMAT_W> imag;
+  sc_fixed<FIXED_POINT, Q_FORMAT_W, SC_RND, SC_SAT> real;
+  sc_fixed<FIXED_POINT, Q_FORMAT_W, SC_RND, SC_SAT> imag;
 } twiddle_t;
 
 SC_MODULE(FFT) {
 public:
   sc_in_clk clk;
-  sc_in<sc_fixed<FIXED_POINT, Q_FORMAT>> data_imag_in, data_real_in;
-  sc_out<sc_fixed<FIXED_POINT_O, Q_FORMAT_O>> data_imag_out, data_real_out;
+  sc_in<sc_fixed<FIXED_POINT, Q_FORMAT, SC_RND, SC_SAT>> data_imag_in,
+      data_real_in;
+  sc_out<sc_fixed<FIXED_POINT_O, Q_FORMAT_O, SC_RND, SC_SAT>> data_imag_out,
+      data_real_out;
   sc_in<sc_logic> data_valid_source;
   sc_in<sc_logic> data_req_sink;
   sc_out<sc_logic> data_valid_sink;

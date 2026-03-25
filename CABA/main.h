@@ -19,8 +19,10 @@ SC_MODULE(TOP) {
   sc_clock clk;
   sc_signal<sc_logic> data_valid_source, data_req_source, data_valid_sink,
       data_req_sink;
-  sc_signal<sc_fixed<FIXED_POINT, Q_FORMAT>> data_imag_in, data_real_in;
-  sc_signal<sc_fixed<FIXED_POINT_O, Q_FORMAT_O>> data_imag_out, data_real_out;
+  sc_signal<sc_fixed<FIXED_POINT, Q_FORMAT, SC_RND, SC_SAT>> data_imag_in,
+      data_real_in;
+  sc_signal<sc_fixed<FIXED_POINT_O, Q_FORMAT_O, SC_RND, SC_SAT>> data_imag_out,
+      data_real_out;
   sc_signal<float> diff_out; // debug
   // sc_fifo<float> source_fft;
   sc_fifo<float> fft_sink;
